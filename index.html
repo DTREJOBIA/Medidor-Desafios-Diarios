@@ -22,13 +22,11 @@ body {
   margin-top: 30px;
 }
 
-/* TITULO */
 h1 {
   text-align: center;
   color: #132c55;
 }
 
-/* RUTA */
 .ruta-box {
   text-align: center;
   margin-bottom: 20px;
@@ -43,7 +41,6 @@ h1 {
   font-weight: bold;
 }
 
-/* TABLA */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -71,7 +68,6 @@ input[type="number"] {
   border: 1px solid #999;
 }
 
-/* RESUMEN */
 .resumen-box {
   margin-top: 15px;
   background: #132c55;
@@ -89,7 +85,6 @@ input[type="number"] {
   border-radius: 8px;
 }
 
-/* MENSAJE */
 .mensaje {
   margin-top: 20px;
   text-align: center;
@@ -97,7 +92,6 @@ input[type="number"] {
   font-weight: bold;
 }
 
-/* COLORES */
 .rojo { color: #d32f2f; }
 .amarillo { color: #f9a825; }
 .verde { color: #2e7d32; }
@@ -126,6 +120,7 @@ input[type="number"] {
 </thead>
 
 <tbody>
+
 <tr>
 <td>Venta Neta Café</td>
 <td><input type="number" id="nec-cafe" oninput="calc()"></td>
@@ -153,6 +148,14 @@ input[type="number"] {
 <td><input type="number" id="real-blend" oninput="calc()"></td>
 <td id="pct-blend">0%</td>
 </tr>
+
+<tr>
+<td>Efectividad de Compra</td>
+<td><input type="number" id="nec-efec" oninput="calc()"></td>
+<td><input type="number" id="real-efec" oninput="calc()"></td>
+<td id="pct-efec">0%</td>
+</tr>
+
 </tbody>
 </table>
 
@@ -188,6 +191,7 @@ function calc(){
   let pr = g("nec-rep") ? (g("real-rep")/g("nec-rep"))*100 : 0;
   let pi = g("nec-inn") ? (g("real-inn")/g("nec-inn"))*100 : 0;
   let pb = g("nec-blend") ? (g("real-blend")/g("nec-blend"))*100 : 0;
+  let pe = g("nec-efec") ? (g("real-efec")/g("nec-efec"))*100 : 0;
 
   function set(id,val){
     let el = document.getElementById(id);
@@ -199,6 +203,7 @@ function calc(){
   set("pct-rep", pr);
   set("pct-inn", pi);
   set("pct-blend", pb);
+  set("pct-efec", pe);
 
   let ventas = (pc + pr)/2;
   let coberturas = (pi + pb)/2;
@@ -206,7 +211,6 @@ function calc(){
   set("ventas", ventas);
   set("coberturas", coberturas);
 
-  // MENSAJE INTELIGENTE
   let msg = document.getElementById("mensaje");
 
   if (ventas < 70 || coberturas < 70) {
